@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { profile, type Link } from '../data/profile';
+interface Props { link: Link; index: number; }
+const { link, index } = Astro.props;
+const external = link.service !== 'email';
+---
+<a class:list={['link-card', `card-${link.service}`]} href={link.url} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} style={`--card-order: ${index}`}>
+  <div class="card-heading">
+    <span class="service-icon"><Icon name={link.service} /></span>
+    <span class="card-label">{link.label}</span>
+    {external && <Icon name="external" class="external-icon" />}
+  </div>
+  <div class="card-copy"><h3>{link.title}</h3><p>{link.description}</p></div>
+  {link.service === 'website' && <div class="website-preview" aria-hidden="true">
+    <div class="preview-toolbar"><span></span><span></span><span></span><span class="preview-domain">vladleesi.dev</span></div>
+    <div class="website-preview-body"><span class="preview-eyebrow">MOBILE SOFTWARE ENGINEER</span><strong>Built with purpose.<br /><span>Made to scale.</span></strong><div class="preview-rule"></div><span class="preview-stack">KOTLIN · ANDROID · COMPOSE</span><div class="preview-monogram">vk<span>.</span></div></div>
+  </div>}
+  {link.service === 'github' && <div class="github-preview" aria-hidden="true">
+    <div class="github-profile"><img src={profile.avatar} srcset={profile.avatarSrcSet} sizes={profile.avatarSizes} width="38" height="38" loading="lazy" alt="" /><div><strong>vladleesi</strong><span>Mobile Software Engineer</span></div><Icon name="github" /></div>
+    <div class="code-preview"><span class="code-comment">// ideas, shipped</span><br /><span class="code-purple">val</span> platforms = <span class="code-yellow">listOf</span>(<br /><span class="code-indent">"Android", "iOS", "Web"</span><br />)</div>
+    <div class="repo-chip"><Icon name="code" /><span>kmp-sharekit</span><span class="language-dot"></span><span>Kotlin</span></div>
+  </div>}
+  {link.service === 'linkedin' && <div class="linkedin-preview" aria-hidden="true"><span class="linkedin-wordmark">in</span><div><strong>Vladislav Kochetov</strong><span>Mobile Software Engineer</span></div><span class="preview-pill">Let’s connect</span></div>}
+  {link.service === 'x' && <div class="x-preview" aria-hidden="true"><span class="x-wordmark">𝕏</span><div><strong>@vladleesi</strong><span>From the person behind the code.</span></div></div>}
+  <div class="card-footer"><span>{link.hostname}</span><span class="link-action">{external ? 'VISIT' : 'SAY HELLO'}<span class="action-line"></span></span></div>
+  {external && <span class="sr-only"> (opens in a new tab)</span>}
+</a>

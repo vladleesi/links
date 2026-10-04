@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import { readFile, stat, readdir } from 'node:fs/promises';
+import path from 'node:path';
+
+const html = await readFile('dist/index.html', 'utf8');
+assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, 'Exactly one H1');
+for (const value of ['Vladislav', 'Kochetov', '@vladleesi', 'Mobile Software Engineer', 'https://vladleesi.dev', 'https://github.com/vladleesi', 'https://www.linkedin.com/in/vladkochetov', 'https://x.com/vladleesi', 'mailto:hello@vladleesi.dev']) assert.ok(html.includes(value), `Initial HTML includes ${value}`);
+for (const value of ['name="description"', 'rel="canonical"', 'property="og:title"', 'property="og:description"', 'property="og:url"', 'property="og:image"', 'name="twitter:card"', 'name="twitter:image"', 'name="robots"', 'name="theme-color"', 'rel="icon"', 'rel="preload" as="image" href="/images/avatar.webp"']) assert.ok(html.includes(value), `Metadata: ${value}`);
+const canonical = html.match(/rel="canonical" href="([^"]+)"/)[1];
+const person = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+assert.equal(person['@type'], 'Person');
+assert.equal(person.name, 'Vladislav Kochetov');
+assert.equal(person.alternateName, 'vladleesi');
+assert.equal(person.sameAs.length, 3);
+assert.equal(person.url, 'https://vladleesi.dev');
+assert.ok((await readFile('dist/robots.txt', 'utf8')).includes(new URL('sitemap.xml', canonical).href));
+assert.ok((await readFile('dist/sitemap.xml', 'utf8')).includes(`<loc>${canonical}</loc>`));
+for (const asset of ['images/avatar.webp', 'og.png', 'favicon.svg']) assert.ok((await stat(path.join('dist', asset))).size > 0, `Asset exists: ${asset}`);
+for (const anchor of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) assert.ok(anchor[0].includes('rel="noopener noreferrer"'), 'Safe external link');
+const assetFiles = await readdir('dist/_astro');
+const scripts = assetFiles.filter(file => file.endsWith('.js'));
+const inlineScripts = [...html.matchAll(/<script\b([^>]*)>(.*?)<\/script>/gs)].filter(match => !match[1].includes('application/ld+json')).reduce((sum, match) => sum + Buffer.byteLength(match[2]), 0);
+const scriptBytes = inlineScripts + (await Promise.all(scripts.map(file => stat(`dist/_astro/${file}`)))).reduce((sum, file) => sum + file.size, 0);
+assert.ok(scriptBytes < 5000, `Client script budget: ${scriptBytes} bytes`);
+assert.ok((await stat('dist/images/avatar.webp')).size < 35000, 'Avatar under 35 KB');
+console.log(JSON.stringify({ result: 'passed', canonical, clientScriptBytes: scriptBytes, htmlBytes: Buffer.byteLength(html), checks: ['static content', 'all links', 'metadata', 'JSON-LD', 'avatar preload', 'assets', 'robots', 'sitemap', 'safe external links', 'asset budgets'] }, null, 2));
