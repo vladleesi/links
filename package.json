@@ -11,6 +11,11 @@
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "verify": "node scripts/verify-build.mjs",
+    "verify:version": "node scripts/verify-version.mjs",
+    "test:version": "node scripts/test-version.mjs",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version",
     "test:browser": "node scripts/test-browser.mjs",
     "test:config": "node scripts/test-config.mjs"
   },

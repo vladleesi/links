@@ -18,13 +18,15 @@ Edit `config.yaml`. Your link names and their order are used exactly as configur
 ```yaml
 profile:
   fullName: Vladislav Kochetov # optional; an empty value is fine
-  username: vladleesi
+  username: vladleesi # required; enter without @
 site:
-  url: https://links.vladleesi.dev
-  theme: default
-links:
-  - name: Website
-    url: https://vladleesi.dev
+  url: https://vladleesi.dev/links # public site URL; include a base path if needed
+  theme: default # optional; default, material, monokai, or a custom theme
+links: # displayed in this order; use [] for no links
+  - name: Website # required; link label
+    url: https://vladleesi.dev # required; http(s), mailto:, or tel: destination
+    icon: website # optional; override the detected icon
+    hostname: false # optional; set true to show the domain
   - name: GitHub
     url: https://github.com/vladleesi
 ```
@@ -60,6 +62,8 @@ The URL’s pathname automatically sets the asset base path. For a custom domain
 ## Checks
 
 ```sh
+npm run verify:version
+npm run test:version
 npm run check
 npm run test:config
 npm run build
@@ -70,6 +74,32 @@ npm run test:browser
 Browser checks use installed Chrome, build fixture configurations, and restore your YAML afterward. Results go to ignored `artifacts/verification/`. They cover all themes, system appearance, small screens, keyboard access, reduced motion, custom fonts, base paths, and no-JavaScript operation. SVG/font licenses are stored beside their local assets.
 
 Pull requests and pushes to `main` run type, configuration, build, and static-output checks. The Pages workflow runs the same checks before deployment. Browser checks are optional and start a temporary local server.
+
+## Releases
+
+Versions use `MAJOR.MINOR.PATCH`. Increase major for breaking changes, minor for compatible features, and patch for compatible fixes. `package.json` and both version fields in `package-lock.json` must agree.
+
+For a subsequent release, choose one of these commands; it updates the package files without committing or tagging:
+
+```sh
+npm run version:patch
+# or npm run version:minor / npm run version:major
+```
+
+The first release uses the existing `1.0.0`; skip the bump for that release. After reviewing changes and obtaining approval to commit and publish:
+
+1. Run the checks above, then `npm run verify:version -- v1.0.0` (substitute the chosen version).
+2. Commit the reviewed changes to `main`, for example `chore(release): prepare v1.0.0`, and push `main`.
+3. Create and push an annotated tag matching the version:
+
+```sh
+git tag -a v1.0.0 -m "Release v1.0.0"
+git push origin v1.0.0
+```
+
+The release workflow validates the version/tag and that the commit belongs to `main`, runs all static checks, and publishes a GitHub release with generated notes and `link-site-v1.0.0.zip`. The ZIP contains the built site, its configured profile/base URL, and license notices; source archives are available through GitHub. Forks should change `config.yaml` and rebuild before hosting. Releases do not publish to npm or enable GitHub Pages.
+
+Release publication uses the workflow's built-in GitHub token; no personal access token is required. Treat a version-tag push as approval to publish that release. Leave published tags unchanged and release fixes under a new version.
 
 ## Contributing and license
 
