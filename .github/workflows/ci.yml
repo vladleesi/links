@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: check-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   check:
@@ -33,3 +33,23 @@ jobs:
       - run: npm run test:config
       - run: npm run build
       - run: npm run verify
+      - name: Package release asset
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          RELEASE_TAG="v$(node -p 'require("./package.json").version')"
+          cp LICENSE dist/LICENSE
+          (cd dist && zip -qr "../link-site-$RELEASE_TAG.zip" .)
+      - uses: actions/upload-artifact@v7
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          name: release-site
+          path: link-site-*.zip
+          if-no-files-found: error
+          retention-days: 7
+
+  release:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/release.yml

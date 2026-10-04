@@ -86,20 +86,17 @@ npm run version:patch
 # or npm run version:minor / npm run version:major
 ```
 
-The first release uses the existing `1.0.0`; skip the bump for that release. After reviewing changes and obtaining approval to commit and publish:
+The first release uses the existing `1.0.0`; skip the bump for that release. After reviewing changes and obtaining approval to commit, push, and publish:
 
-1. Run the checks above, then `npm run verify:version -- v1.0.0` (substitute the chosen version).
+1. Run the checks above.
 2. Commit the reviewed changes to `main`, for example `chore(release): prepare v1.0.0`, and push `main`.
-3. Create and push an annotated tag matching the version:
+3. CI checks the push, builds and verifies the site, then calls the release workflow only after the check job succeeds. Pull requests cannot publish releases.
 
-```sh
-git tag -a v1.0.0 -m "Release v1.0.0"
-git push origin v1.0.0
-```
+The workflow reads the package version, automatically creates its `vMAJOR.MINOR.PATCH` tag at the exact checked commit, and publishes a GitHub release with generated notes and the checked build's ZIP (for example, `link-site-v1.0.0.zip`). No manual tag or release command is needed. If the version already has a published release, publication is skipped; bump the version for the next release. An unfinished draft or a conflicting tag fails visibly and needs review.
 
-The release workflow validates the version/tag and that the commit belongs to `main`, runs all static checks, and publishes a GitHub release with generated notes and `link-site-v1.0.0.zip`. The ZIP contains the built site, its configured profile/base URL, and license notices; source archives are available through GitHub. Forks should change `config.yaml` and rebuild before hosting. Releases do not publish to npm or enable GitHub Pages.
+The ZIP contains the built site, its configured profile/base URL, and license notices; source archives are available through GitHub. Forks should change `config.yaml` and rebuild before hosting. Releases do not publish to npm or enable GitHub Pages.
 
-Release publication uses the workflow's built-in GitHub token; no personal access token is required. Treat a version-tag push as approval to publish that release. Leave published tags unchanged and release fixes under a new version.
+Release publication uses the workflow's built-in GitHub token; no personal access token is required. A push to `main` with an unpublished version can publish a release automatically, so obtain release approval before that push. Leave published tags unchanged and release fixes under a new version.
 
 ## Contributing and license
 

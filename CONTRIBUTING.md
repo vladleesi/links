@@ -29,4 +29,4 @@ Use `MAJOR.MINOR.PATCH`: major for breaking changes, minor for compatible featur
 
 Use `npm run version:patch`, `npm run version:minor`, or `npm run version:major` to update the version and lockfile together. These commands create neither commits nor tags. Keep a version bump in the release preparation commit, such as `chore(release): prepare v1.1.0`.
 
-Follow [the release steps in README.md](README.md#releases). Pushing a matching version tag triggers automatic GitHub release publication, so obtain approval for the release before creating or pushing its tag. Never move a published tag; ship corrections with a new version.
+Follow [the release steps in README.md](README.md#releases). Pushing `main` with an unpublished package version triggers automatic tag creation and GitHub release publication after CI checks pass. Obtain approval for the release before pushing; manual tagging is unnecessary. Already-published versions are skipped. Never move a published tag; ship corrections with a new version.

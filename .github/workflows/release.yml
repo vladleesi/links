@@ -1,65 +1,66 @@
 name: Publish release
 
 on:
-  push:
-    tags: ['v*.*.*']
+  workflow_call:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: release-${{ github.ref }}
+  group: release-main
   cancel-in-progress: false
 
-env:
-  ASTRO_TELEMETRY_DISABLED: '1'
-  RELEASE_TAG: ${{ github.ref_name }}
-
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
+    env:
+      GH_REPO: ${{ github.repository }}
     steps:
       - uses: actions/checkout@v7
         with:
+          ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: npm
-      - name: Require a commit from main
-        run: git merge-base --is-ancestor HEAD origin/main
-      - run: npm ci
-      - run: npm run verify:version -- "$RELEASE_TAG"
-      - run: npm run test:version
-      - run: npm run check
-      - run: npm run test:config
-      - run: npm run build
-      - run: npm run verify
-      - name: Package static site
+      - name: Read checked version
+        id: version
         run: |
-          cp LICENSE dist/LICENSE
-          (cd dist && zip -qr "../link-site-$RELEASE_TAG.zip" .)
-      - uses: actions/upload-artifact@v7
-        with:
-          name: release-site
-          path: link-site-*.zip
-          if-no-files-found: error
-          retention-days: 7
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v8
-        with:
-          name: release-site
-      - name: Publish GitHub release
+          node scripts/verify-version.mjs
+          node -e 'console.log("tag=v" + require("./package.json").version)' >> "$GITHUB_OUTPUT"
+      - name: Check existing release
+        id: existing
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-        run: gh release create "$RELEASE_TAG" "link-site-$RELEASE_TAG.zip" --verify-tag --generate-notes --title "$RELEASE_TAG"
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          if draft=$(gh release view "$RELEASE_TAG" --json isDraft --jq '.isDraft'); then
+            if [ "$draft" = "true" ]; then
+              echo "An unfinished draft exists for $RELEASE_TAG; review it before retrying."
+              exit 1
+            fi
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "$RELEASE_TAG is already published; skipping."
+          else
+            if git show-ref --verify --quiet "refs/tags/$RELEASE_TAG"; then
+              tagged_commit=$(git rev-parse "refs/tags/$RELEASE_TAG^{commit}")
+              if [ "$tagged_commit" != "$GITHUB_SHA" ]; then
+                echo "Existing tag $RELEASE_TAG points to another commit; bump the version."
+                exit 1
+              fi
+            fi
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/download-artifact@v8
+        if: steps.existing.outputs.published == 'false'
+        with:
+          name: release-site
+          path: release-assets
+      - name: Publish GitHub release
+        if: steps.existing.outputs.published == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        run: gh release create "$RELEASE_TAG" "release-assets/link-site-$RELEASE_TAG.zip" --target "$GITHUB_SHA" --generate-notes --title "$RELEASE_TAG"
