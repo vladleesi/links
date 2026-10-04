@@ -19,9 +19,11 @@ Edit `config.yaml`. Your link names and their order are used exactly as configur
 profile:
   fullName: Vladislav Kochetov # optional; an empty value is fine
   username: vladleesi # required; enter without @
+  title: Mobile software engineer # optional; shown below username; an empty value is fine
 site:
   url: https://vladleesi.dev/links # public site URL; include a base path if needed
   theme: default # optional; default, material, monokai, or a custom theme
+  mode: # optional; light or dark; empty or omitted follows the system
 links: # displayed in this order; use [] for no links
   - name: Website # required; link label
     url: https://vladleesi.dev # required; http(s), mailto:, or tel: destination
@@ -35,7 +37,7 @@ Icons are detected from the hostname using the local collection in `src/assets/i
 
 ## Themes
 
-Choose `default`, `material`, or `monokai` in YAML. Each starts with the system’s light/dark preference. The sun/moon button switches appearance immediately and saves your choice in this browser. Links and system appearance still work without JavaScript; the switch stays hidden.
+Choose `default`, `material`, or `monokai` in YAML. Set `site.mode` to `light` or `dark` to choose the initial appearance regardless of the system setting; leave it empty or omit it to follow the system. The sun/moon button remains available, switches appearance immediately, and saves your choice in this browser. A saved visitor choice takes precedence over the configured mode. Without JavaScript, links and the configured or system appearance still work; the switch stays hidden.
 
 Link hover adds a small bounce and icon wiggle on devices with a mouse. Animations respect the system’s reduced-motion preference.
 
@@ -88,11 +90,11 @@ npm run version:patch
 
 The first release uses the existing `1.0.0`; skip the bump for that release. After reviewing changes and obtaining approval to commit, push, and publish:
 
-1. Run the checks above.
+1. Add a dated `## MAJOR.MINOR.PATCH - YYYY-MM-DD` entry to `CHANGELOG.md` with features, fixes, breaking changes, and migration steps when needed, then run the checks above. Version validation also requires release notes for the current version.
 2. Commit the reviewed changes to `main`, for example `chore(release): prepare v1.0.0`, and push `main`.
 3. CI checks the push, builds and verifies the site, then calls the release workflow only after the check job succeeds. Pull requests cannot publish releases.
 
-The workflow reads the package version, automatically creates its `vMAJOR.MINOR.PATCH` tag at the exact checked commit, and publishes a GitHub release with generated notes and the checked build's ZIP (for example, `link-site-v1.0.0.zip`). No manual tag or release command is needed. If the version already has a published release, publication is skipped; bump the version for the next release. An unfinished draft or a conflicting tag fails visibly and needs review.
+The workflow reads the package version, automatically creates its `vMAJOR.MINOR.PATCH` tag at the exact checked commit, and publishes a GitHub release with that version's changelog notes and the checked build's ZIP (for example, `link-site-v1.0.0.zip`). No manual tag or release command is needed. If the version already has a published release, publication is skipped; bump the version for the next release. An unfinished draft or a conflicting tag fails visibly and needs review.
 
 The ZIP contains the built site, its configured profile/base URL, and license notices; source archives are available through GitHub. Forks should change `config.yaml` and rebuild before hosting. Releases do not publish to npm or enable GitHub Pages.
 

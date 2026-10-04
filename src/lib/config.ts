@@ -23,11 +23,13 @@ const linkUrl = z.string().trim().refine(value => {
 const schema = z.object({
   profile: z.object({
     fullName: z.string().trim().transform(value => value.replace(/\s+/gu, ' ')).nullish().transform(value => value || undefined),
+    title: z.string().trim().transform(value => value.replace(/\s+/gu, ' ')).nullish().transform(value => value || undefined),
     username: z.string().trim().min(1, 'Username is required.').transform(value => value.replace(/^@/, '')).pipe(z.string().min(1, 'Username is required.').regex(/^[^\s/\u0000-\u001f\u007f]+$/u, 'Username must not contain spaces, slashes, or control characters.')),
   }).strict(),
   site: z.object({
     url: webUrl,
     theme: z.string().regex(/^[a-z][a-z0-9-]*$/, 'Use a theme filename, such as default.').default('default'),
+    mode: z.preprocess(value => typeof value === 'string' ? value.trim() || undefined : value ?? undefined, z.enum(['light', 'dark']).optional()),
   }).strict(),
   links: z.array(z.object({ name: z.string().trim().min(1, 'Link name is required.'), url: linkUrl, icon: z.string().regex(/^[a-z][a-z0-9-]*$/).optional(), hostname: z.boolean().default(false) }).strict()),
 }).strict();

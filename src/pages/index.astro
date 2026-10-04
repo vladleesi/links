@@ -15,7 +15,7 @@ const schema = {
 const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_DATE_EPOCH) * 1000).getUTCFullYear() : new Date().getUTCFullYear();
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" data-mode={config.site.mode}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -23,8 +23,8 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
     <meta name="description" content={description} />
     <link rel="canonical" href={config.site.url} />
     <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
-    <meta name="theme-color" content={theme.light.background} media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content={theme.dark.background} media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content={theme.light.background} media={config.site.mode ? (config.site.mode === 'light' ? undefined : 'not all') : '(prefers-color-scheme: light)'} />
+    <meta name="theme-color" content={theme.dark.background} media={config.site.mode ? (config.site.mode === 'dark' ? undefined : 'not all') : '(prefers-color-scheme: dark)'} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content={title} />
@@ -46,7 +46,7 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
       try {
         const mode = localStorage.getItem('link-site-mode');
         if (mode === 'light' || mode === 'dark') document.documentElement.dataset.mode = mode;
-      } catch { /* Use the system appearance when storage is unavailable. */ }
+      } catch { /* Keep the configured or system appearance when storage is unavailable. */ }
     </script>
     <style is:inline set:html={themeCss} />
   </head>
@@ -57,6 +57,7 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
         <div class="profile-copy">
           <h1>{config.profile.fullName || '@' + config.profile.username}</h1>
           {config.profile.fullName && <p class="username">@{config.profile.username}</p>}
+          {config.profile.title && <p class="profile-title">{config.profile.title}</p>}
         </div>
         <button class="mode-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="false" hidden>
           <svg class="mode-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13a8.5 8.5 0 0 1-9.5-9.5A8.5 8.5 0 1 0 20.5 13Z" /></svg>
@@ -64,7 +65,7 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
         </button>
       </header>
       <nav id="links" aria-label="Personal links" tabindex="-1"><ul class="links">{links.map(link => <li><LinkCard link={link} /></li>)}</ul></nav>
-      <footer>© {year} {displayName} <a class="credits-link" href={assetPath('credits.txt')}>Credits</a></footer>
+      <footer>© {year} {config.profile.username} <a class="credits-link" href={assetPath('credits.txt')}>Credits</a></footer>
     </main>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.mode-toggle');

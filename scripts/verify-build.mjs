@@ -3,12 +3,18 @@ import { readFile, readdir } from 'node:fs/promises';
 import { config, title, description, displayName, initials, assetPath } from '../src/lib/config.ts';
 import { detectIcon, isProfileLink } from '../src/lib/services.ts';
 import { iconIds } from '../src/lib/services.ts';
+import { verifyAppearance } from './verify-appearance.mjs';
 
 const html = await readFile('dist/index.html', 'utf8');
 const escape = value => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1);
 assert.ok(html.includes(escape(displayName)));
 assert.ok(html.includes('@' + config.profile.username));
+if (config.profile.title) {
+  assert.ok(html.includes('<p class="profile-title">' + escape(config.profile.title) + '</p>'), 'Configured profile title is rendered as text');
+} else {
+  assert.ok(!html.includes('class="profile-title"'), 'Empty profile titles leave no markup');
+}
 assert.ok(html.includes('<title>' + escape(title) + '</title>'));
 assert.equal((html.match(/class="link-card"/g) || []).length, config.links.length);
 for (const link of config.links) assert.ok(html.includes('href="' + escape(link.url) + '"'));
@@ -35,6 +41,7 @@ assert.equal(png.readUInt32BE(20), 630);
 assert.ok(png.length > 1000);
 assert.ok(html.includes('class="mode-toggle"'), 'Appearance switch is present');
 assert.ok(html.includes('aria-label="Dark mode"'), 'Appearance switch has an accessible name');
+verifyAppearance(html, config.site.mode);
 assert.equal((html.match(/<script/g) || []).length, 3, 'Only JSON-LD, appearance initialization, and toggle JavaScript');
 assert.ok(!html.includes('<img'), 'No avatar or preview images');
 for (const anchor of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) assert.ok(anchor[0].includes('rel="noopener noreferrer"'));

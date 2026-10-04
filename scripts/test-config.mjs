@@ -6,6 +6,14 @@ import { detectIcon, services } from '../src/lib/services.ts';
 const example = { profile: { fullName: 'Vladislav Kochetov', username: 'vladleesi' }, site: { url: 'https://example.com', theme: 'default' }, links: [] };
 const parse = value => parseConfig(stringify(value));
 assert.equal(parse(example).site.url, 'https://example.com/');
+assert.equal(parse(example).site.mode, undefined);
+for (const mode of [null, '', '   ']) assert.equal(parse({ ...example, site: { ...example.site, mode } }).site.mode, undefined);
+for (const mode of ['light', 'dark']) assert.equal(parse({ ...example, site: { ...example.site, mode: ` ${mode} ` } }).site.mode, mode);
+for (const mode of ['system', 'auto', 'DARK', true, 1]) assert.throws(() => parse({ ...example, site: { ...example.site, mode } }), /site.mode/);
+assert.equal(parse(example).profile.title, undefined);
+for (const title of [null, '', '   ']) assert.equal(parse({ ...example, profile: { ...example.profile, title } }).profile.title, undefined);
+assert.equal(parse({ ...example, profile: { username: 'vladleesi', title: '  Mobile   software engineer  ' } }).profile.title, 'Mobile software engineer');
+assert.throws(() => parse({ ...example, profile: { ...example.profile, title: 42 } }), /profile.title/);
 for (const [fullName, username, expected] of [
   ['Vladislav Kochetov', 'vladleesi', 'VK'], ['  vladislav   kochetov  ', 'vladleesi', 'VK'],
   [undefined, 'vladleesi', 'VL'], ['', 'vladleesi', 'VL'], [null, 'vladleesi', 'VL'],

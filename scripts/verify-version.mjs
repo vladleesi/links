@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { releaseNotes } from './release-notes.mjs';
 
 export function verifyVersion({ packageVersion, lockVersion, lockRootVersion, tag }) {
   if (!/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/.test(packageVersion)) {
@@ -19,5 +20,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
   const lock = JSON.parse(readFileSync('package-lock.json', 'utf8'));
   const version = verifyVersion({ packageVersion: pkg.version, lockVersion: lock.version, lockRootVersion: lock.packages?.['']?.version, tag: process.argv[2] });
+  releaseNotes(readFileSync('CHANGELOG.md', 'utf8'), version);
   console.log(`Version ${version} is consistent${process.argv[2] ? ' with tag ' + process.argv[2] : ''}.`);
 }
