@@ -1,0 +1,27 @@
+profile:
+  fullName: Vladislav Kochetov
+  username: vladleesi
+
+site:
+  url: https://vladleesi.dev/links
+  theme: material
+
+links:
+  - name: Website
+    url: https://vladleesi.dev
+  - name: GitHub
+    url: https://github.com/vladleesi
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/vladkochetov
+  - name: Resume
+    url: https://vladleesi.dev/assets/resume/Vladislav_Kochetov_Android_Engineer_Resume.pdf
+  - name: Email
+    url: mailto:hello@vladleesi.dev
+  # - name: X
+  #   url: https://x.com/vladleesi
+  # - name: Dev.to
+  #   url: https://dev.to/vladleesi
+  # - name: Medium
+  #   url: https://medium.com/@vladleesi
+  # - name: RSS Feed
+  #   url: https://vladleesi.dev/feed.xml

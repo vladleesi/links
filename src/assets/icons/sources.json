@@ -1,0 +1,162 @@
+{
+  "applemusic": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/applemusic.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "artstation": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/artstation.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "bandcamp": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/bandcamp.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "behance": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/behance.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "bitbucket": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/bitbucket.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "bluesky": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/bluesky.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "buymeacoffee": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/buymeacoffee.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "codepen": {
+    "source": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/14c65a3747d0f3b751f15831fc719236aea8729d/svgs/brands/codepen.svg",
+    "license": "CC-BY-4.0 (Font Awesome Free)"
+  },
+  "devdotto": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/devdotto.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "discord": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/discord.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "docker": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/docker.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "dribbble": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/dribbble.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "facebook": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/facebook.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "github": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/github.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "gitlab": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/gitlab.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "hackerrank": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/hackerrank.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "instagram": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/instagram.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "kofi": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/kofi.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "leetcode": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/leetcode.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "linkedin": {
+    "source": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/14c65a3747d0f3b751f15831fc719236aea8729d/svgs/brands/linkedin-in.svg",
+    "license": "CC-BY-4.0 (Font Awesome Free)"
+  },
+  "mastodon": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/mastodon.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "medium": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/medium.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "npm": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/npm.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "patreon": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/patreon.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "pinterest": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/pinterest.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "reddit": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/reddit.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "slack": {
+    "source": "https://raw.githubusercontent.com/FortAwesome/Font-Awesome/14c65a3747d0f3b751f15831fc719236aea8729d/svgs/brands/slack.svg",
+    "license": "CC-BY-4.0 (Font Awesome Free)"
+  },
+  "soundcloud": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/soundcloud.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "spotify": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/spotify.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "stackoverflow": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/stackoverflow.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "substack": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/substack.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "telegram": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/telegram.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "threads": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/threads.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "tiktok": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/tiktok.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "tumblr": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/tumblr.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "twitch": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/twitch.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "vimeo": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/vimeo.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "whatsapp": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/whatsapp.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "x": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/x.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  },
+  "youtube": {
+    "source": "https://raw.githubusercontent.com/simple-icons/simple-icons/9f1c11219a45e1440271e98a143490594a4aba6d/icons/youtube.svg",
+    "license": "CC0-1.0 (Simple Icons)"
+  }
+}

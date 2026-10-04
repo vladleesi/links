@@ -1,97 +1,97 @@
 ---
-import '@fontsource/ibm-plex-mono/latin-400.css';
 import '../styles/global.css';
-import { profile, socials } from '../data/profile';
+import { config, displayName, title, description, assetPath } from '../lib/config';
+import { theme, themeCss } from '../lib/theme';
+import { resolveLinks } from '../lib/links';
 import LinkCard from '../components/LinkCard.astro';
-import Icon from '../components/Icon.astro';
-const canonical = new URL('/', Astro.site);
-const socialImage = new URL('/og.png', Astro.site);
+
+const links = resolveLinks(config.links);
+const image = new URL('og.png', config.site.url).href;
 const schema = {
   '@context': 'https://schema.org', '@type': 'Person',
-  name: profile.name, alternateName: profile.handle, jobTitle: profile.title,
-  url: profile.website, image: new URL(profile.avatar, Astro.site).href,
-  description: profile.description, sameAs: socials.map(link => link.url),
-  knowsAbout: ['Android', 'Kotlin', 'Kotlin Multiplatform', 'Mobile software architecture'],
+  name: displayName, alternateName: config.profile.username, url: config.site.url,
+  sameAs: links.filter(link => link.profile).map(link => link.url),
 };
+const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_DATE_EPOCH) * 1000).getUTCFullYear() : new Date().getUTCFullYear();
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <title>Vladislav Kochetov — Mobile Software Engineer / vladleesi</title>
-    <meta name="description" content={profile.description} />
-    <meta name="theme-color" content="#0d0e10" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={config.site.url} />
+    <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
+    <meta name="theme-color" content={theme.light.background} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content={theme.dark.background} media="(prefers-color-scheme: dark)" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" as="image" href={profile.avatar} imagesrcset={profile.avatarSrcSet} imagesizes={profile.avatarSizes} type="image/webp" fetchpriority="high" />
     <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content="vladleesi" />
-    <meta property="og:title" content={`${profile.name} — ${profile.title}`} />
-    <meta property="og:description" content={profile.description} />
-    <meta property="og:url" content={canonical.href} />
-    <meta property="og:image" content={socialImage.href} />
+    <meta property="og:site_name" content={title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={config.site.url} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Vladislav Kochetov — Mobile Software Engineer. Android, Kotlin, Multiplatform." />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@vladleesi" />
-    <meta name="twitter:creator" content="@vladleesi" />
-    <meta name="twitter:title" content={`${profile.name} — ${profile.title}`} />
-    <meta name="twitter:description" content={profile.description} />
-    <meta name="twitter:image" content={socialImage.href} />
-    <meta name="twitter:image:alt" content="Vladislav Kochetov — Mobile Software Engineer" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={title} />
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+    <script is:inline>
+      try {
+        const mode = localStorage.getItem('link-site-mode');
+        if (mode === 'light' || mode === 'dark') document.documentElement.dataset.mode = mode;
+      } catch { /* Use the system appearance when storage is unavailable. */ }
+    </script>
+    <style is:inline set:html={themeCss} />
   </head>
   <body>
     <a class="skip-link" href="#links">Skip to links</a>
-    <div class="ambient" aria-hidden="true"></div>
-    <div class="page-shell">
-      <header class="masthead"><a href="#" class="wordmark"><span class="brand-brackets">[</span> vl<span class="brand-amber">.</span> <span class="brand-brackets">]</span><span class="sr-only"> vladleesi home</span></a><span class="masthead-note">A LITTLE CORNER OF THE INTERNET</span><span class="edition">PERSONAL / 01</span></header>
-      <main>
-        <section class="profile" aria-labelledby="profile-name">
-          <div class="portrait-wrap"><div class="portrait-orbit" aria-hidden="true"></div><img class="portrait" src={profile.avatar} srcset={profile.avatarSrcSet} sizes={profile.avatarSizes} alt="Vladislav Kochetov" width="160" height="160" loading="eager" fetchpriority="high" /><span class="portrait-code" aria-hidden="true"><Icon name="code" /></span></div>
-          <div class="profile-copy"><p class="handle">@{profile.handle}</p><h1 id="profile-name">Vladislav <br />Kochetov<span class="name-period">.</span></h1><p class="role">{profile.title}</p><p class="tagline">{profile.tagline}</p><ul class="specialties" aria-label="Specialties">{profile.specialties.map(item => <li>{item}</li>)}</ul></div>
-          <div class="profile-coordinate" aria-hidden="true">CODE. CRAFT. CURIOSITY.<span>01 — 05</span></div>
-        </section>
-        <section id="links" class="links-section" aria-labelledby="links-heading" tabindex="-1"><div class="section-heading"><h2 id="links-heading"><span class="section-dash" aria-hidden="true"></span>Find me here</h2><span class="section-count">FIVE LINKS. ONE HUMAN.</span></div><div class="links-grid">{profile.links.map((link, index) => <LinkCard link={link} index={index} />)}</div></section>
-      </main>
-      <footer class="footer"><span>Thoughtfully built. Always evolving.</span><span class="footer-signature">© {new Date().getUTCFullYear()} <span>vladleesi<span class="brand-amber">.</span></span></span></footer>
-    </div>
+    <main class="page">
+      <header class="profile">
+        <div class="profile-copy">
+          <h1>{config.profile.fullName || '@' + config.profile.username}</h1>
+          {config.profile.fullName && <p class="username">@{config.profile.username}</p>}
+        </div>
+        <button class="mode-toggle" type="button" role="switch" aria-label="Dark mode" aria-checked="false" hidden>
+          <svg class="mode-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13a8.5 8.5 0 0 1-9.5-9.5A8.5 8.5 0 1 0 20.5 13Z" /></svg>
+          <svg class="mode-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
+        </button>
+      </header>
+      <nav id="links" aria-label="Personal links" tabindex="-1"><ul class="links">{links.map(link => <li><LinkCard link={link} /></li>)}</ul></nav>
+      <footer>© {year} {displayName} <a class="credits-link" href={assetPath('credits.txt')}>Credits</a></footer>
+    </main>
     <script>
-      // Pointer effects are progressive enhancements; all content is static HTML.
-      const motion = matchMedia('(prefers-reduced-motion: reduce)');
-      const pointer = matchMedia('(hover: hover) and (pointer: fine) and (min-width: 768px)');
-      const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-      let pressedCard: HTMLAnchorElement | null = null;
-      const release = () => { pressedCard?.classList.remove('is-pressed'); pressedCard = null; };
-      document.addEventListener('pointerdown', event => {
-        if (event.pointerType !== 'touch') return;
-        release();
-        pressedCard = (event.target as Element).closest<HTMLAnchorElement>('.link-card');
-        pressedCard?.classList.add('is-pressed');
-      }, { passive: true });
-      document.addEventListener('pointerup', release, { passive: true });
-      document.addEventListener('pointercancel', release, { passive: true });
-      window.addEventListener('blur', release);
-      if (!connection?.saveData) {
-        document.querySelectorAll<HTMLAnchorElement>('.link-card').forEach(card => {
-          let frame = 0;
-          card.addEventListener('pointermove', event => {
-            if (motion.matches || !pointer.matches || frame) return;
-            frame = requestAnimationFrame(() => {
-              const bounds = card.getBoundingClientRect();
-              card.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
-              card.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
-              frame = 0;
-            });
-          });
-          card.addEventListener('pointerleave', () => {
-            cancelAnimationFrame(frame); frame = 0;
-            card.style.removeProperty('--pointer-x'); card.style.removeProperty('--pointer-y');
-          });
+      const toggle = document.querySelector<HTMLButtonElement>('.mode-toggle');
+      const root = document.documentElement;
+      const system = window.matchMedia('(prefers-color-scheme: dark)');
+      const colors = Array.from(document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]'), meta => meta.content);
+      const isDark = () => root.dataset.mode ? root.dataset.mode === 'dark' : system.matches;
+
+      function syncMode() {
+        const dark = isDark();
+        toggle?.setAttribute('aria-checked', String(dark));
+        if (toggle) toggle.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+        document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach(meta => {
+          meta.content = colors[dark ? 1 : 0];
+          meta.removeAttribute('media');
         });
+      }
+
+      if (toggle) {
+        syncMode();
+        toggle.addEventListener('click', () => {
+          root.dataset.mode = isDark() ? 'light' : 'dark';
+          try { localStorage.setItem('link-site-mode', root.dataset.mode); } catch { /* Switching still works without storage. */ }
+          syncMode();
+        });
+        system.addEventListener('change', syncMode);
+        toggle.hidden = false;
       }
     </script>
   </body>
