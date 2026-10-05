@@ -1,6 +1,6 @@
 {
   "name": "link-site",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A minimal, reusable YAML-driven personal link hub built with Astro.",
   "license": "MIT",
   "private": true,

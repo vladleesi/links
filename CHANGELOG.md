@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0 - 2026-10-05
+
+- Add `control`: near-black and warm-paper palettes with restrained red accents and local Archivo typography, preserving the shared layout, cards, and animations.
+- Bundle the pinned Archivo variable font, upstream provenance, and full SIL Open Font License in the distributed credits.
+- Check both palettes for readable text, graphical accent contrast, and selection contrast; document theme selection in the README.
+
 ## 1.3.0 - 2026-10-04
 
 - Add a compact footer theme dropdown with an inset arrow in development and `npm run build:debug`, with separate output in `dist-debug/`.

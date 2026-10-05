@@ -3,6 +3,13 @@
   "revision": "9710da1eacb3be272583c3224dcb70f9da6eadbb",
   "fonts": [
     {
+      "family": "Archivo",
+      "file": "archivo.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/archivo/Archivo%5Bwdth%2Cwght%5D.ttf",
+      "licenseFile": "OFL-Archivo.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/archivo/OFL.txt"
+    },
+    {
       "family": "Source Sans 3",
       "file": "source-sans-3.ttf",
       "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",

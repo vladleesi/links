@@ -37,7 +37,9 @@ Icons are detected from the hostname using the local collection in `src/assets/i
 
 ## Themes
 
-Set `site.theme` to `default`, `material`, `monokai`, `paper`, `arctic`, `ember`, `console`, `carbon`, or `signal`.
+Set `site.theme` to `default`, `material`, `monokai`, `paper`, `arctic`, `ember`, `console`, `carbon`, `signal`, or `control`.
+
+`control` pairs local Archivo typography with near-black, warm paper, and restrained red accents for a stark editorial feel. Set `site.theme: control` and optionally `site.mode: dark` for its strongest expression; light mode uses warm off-white surfaces. It keeps the shared cards, spacing, and animations.
 
 **See the themes yourself:** run `npm run build:debug`, then `npm run preview -- --outDir dist-debug`, and use the footer dropdown to compare them. Selections are temporary and leave YAML unchanged.
 
