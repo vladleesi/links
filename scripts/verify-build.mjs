@@ -50,5 +50,5 @@ const iconFiles = await readdir('src/assets/icons');
 for (const icon of iconIds) assert.ok(iconFiles.includes(icon + '.svg'), 'Local icon exists: ' + icon);
 assert.ok(html.includes('href="' + assetPath('credits.txt') + '"'));
 const credits = await readFile('dist/credits.txt', 'utf8');
-for (const file of ['public/fonts/OFL.txt', 'public/fonts/OFL-OpenSans.txt', 'src/assets/icons/simple-icons.txt', 'src/assets/icons/font-awesome.txt', 'src/assets/icons/lucide.txt']) assert.ok(credits.includes(await readFile(file, 'utf8')), 'Distributed license: ' + file);
+for (const file of ['public/fonts/sources.json', 'public/fonts/OFL.txt', 'public/fonts/OFL-OpenSans.txt', 'public/fonts/OFL-SourceSans3.txt', 'public/fonts/OFL-Lora.txt', 'public/fonts/OFL-IBMPlexSans.txt', 'src/assets/icons/simple-icons.txt', 'src/assets/icons/font-awesome.txt', 'src/assets/icons/lucide.txt']) assert.ok(credits.includes(await readFile(file, 'utf8')), 'Distributed license or provenance: ' + file);
 console.log('Passed static content, local icons, generated favicon/OG, SEO, JSON-LD, robots, sitemap, safe links, appearance switch markup, and distributed asset licenses.');

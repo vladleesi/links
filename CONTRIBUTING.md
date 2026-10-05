@@ -13,6 +13,7 @@ npm run verify:version
 npm run test:version
 npm run check
 npm run test:config
+npm run test:themes
 npm run build
 npm run verify
 ```

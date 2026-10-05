@@ -1,6 +1,6 @@
 {
   "name": "link-site",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A minimal, reusable YAML-driven personal link hub built with Astro.",
   "license": "MIT",
   "private": true,
@@ -17,7 +17,8 @@
     "version:minor": "npm version minor --no-git-tag-version",
     "version:major": "npm version major --no-git-tag-version",
     "test:browser": "node scripts/test-browser.mjs",
-    "test:config": "node scripts/test-config.mjs"
+    "test:config": "node scripts/test-config.mjs",
+    "test:themes": "node scripts/test-themes.mjs"
   },
   "dependencies": {
     "astro": "7.3.5"

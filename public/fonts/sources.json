@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/google/fonts",
+  "revision": "9710da1eacb3be272583c3224dcb70f9da6eadbb",
+  "fonts": [
+    {
+      "family": "Source Sans 3",
+      "file": "source-sans-3.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/sourcesans3/SourceSans3%5Bwght%5D.ttf",
+      "licenseFile": "OFL-SourceSans3.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/sourcesans3/OFL.txt"
+    },
+    {
+      "family": "Lora",
+      "file": "lora.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/lora/Lora%5Bwght%5D.ttf",
+      "licenseFile": "OFL-Lora.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/lora/OFL.txt"
+    },
+    {
+      "family": "IBM Plex Sans",
+      "file": "ibm-plex-sans.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/ibmplexsans/IBMPlexSans%5Bwdth%2Cwght%5D.ttf",
+      "licenseFile": "OFL-IBMPlexSans.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/ibmplexsans/OFL.txt"
+    }
+  ]
+}
