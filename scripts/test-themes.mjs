@@ -11,7 +11,7 @@ function luminance(hex) {
   return .2126 * red + .7152 * green + .0722 * blue;
 }
 
-for (const name of ['paper', 'arctic', 'ember']) {
+for (const name of ['paper', 'arctic', 'ember', 'console', 'carbon', 'signal']) {
   const { default: theme } = await import(pathToFileURL(resolve(`src/themes/${name}.ts`)).href);
   for (const mode of ['light', 'dark']) {
     const colors = theme[mode];

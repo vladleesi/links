@@ -22,7 +22,7 @@ profile:
   title: Mobile software engineer # optional; shown below username; an empty value is fine
 site:
   url: https://vladleesi.dev/links # public site URL; include a base path if needed
-  theme: default # optional; default, material, monokai, paper, arctic, ember, or a custom theme
+  theme: default # optional; see Themes below; defaults to default
   mode: # optional; light or dark; empty or omitted follows the system
 links: # displayed in this order; use [] for no links
   - name: Website # required; link label
@@ -37,16 +37,9 @@ Icons are detected from the hostname using the local collection in `src/assets/i
 
 ## Themes
 
-Choose `default`, `material`, `monokai`, `paper`, `arctic`, or `ember` in YAML:
+Set `site.theme` to `default`, `material`, `monokai`, `paper`, `arctic`, `ember`, `console`, `carbon`, or `signal`.
 
-| Theme | Palette and typography |
-| --- | --- |
-| `default` | Neutral gray with Manrope |
-| `material` | Soft purple with Open Sans |
-| `monokai` | Olive and green with system fonts |
-| `paper` | Warm cream and beige, Source Sans 3 body text and Lora headings |
-| `arctic` | Cool Nordic blues with IBM Plex Sans |
-| `ember` | Terracotta and orange with Manrope |
+**See the themes yourself:** run `npm run build:debug`, then `npm run preview -- --outDir dist-debug`, and use the footer dropdown to compare them. Selections are temporary and leave YAML unchanged.
 
 All themes support light and dark appearances and use local fonts. Set `site.mode` to `light` or `dark` to choose the initial appearance regardless of the system setting; leave it empty or omit it to follow the system. The sun/moon button remains available, switches appearance immediately, and saves your choice in this browser. A saved visitor choice takes precedence over the configured mode. Without JavaScript, links and the configured or system appearance still work; the switch stays hidden.
 
@@ -62,6 +55,8 @@ npm run preview
 ```
 
 The complete static site is in `dist/`. YAML validation, favicon initials, the 1200×630 sharing image, SEO metadata, robots.txt, and sitemap are generated automatically. Builds make no requests to linked sites, icon APIs, or font services.
+
+`npm run dev` also includes the theme dropdown. Production `npm run build` omits all debug UI, styles, and scripts.
 
 ## GitHub Pages
 

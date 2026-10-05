@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.0 - 2026-10-04
+
+- Add a compact footer theme dropdown with an inset arrow in development and `npm run build:debug`, with separate output in `dist-debug/`.
+- Keep production output free of debug UI, styles, and scripts; check both builds in CI.
+- Add `console` (JetBrains Mono and green), `carbon` (IBM Plex Sans and blue), and `signal` (Space Grotesk and safety orange), each with accessible light and dark palettes.
+- Include pinned local font sources and full licenses for JetBrains Mono and Space Grotesk.
+- Document debug previews for comparing themes in the browser.
+
 ## 1.2.0 - 2026-10-04
 
 ### Added

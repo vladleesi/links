@@ -1,0 +1,43 @@
+---
+import { config } from '../lib/config';
+import { createThemeCss, themeNames } from '../lib/theme';
+
+const css = themeNames.map(name => createThemeCss(name, `:root[data-debug-theme=${JSON.stringify(name)}]`)).join('');
+---
+<style is:inline set:html={css} />
+<span id="debug-theme-picker" hidden>
+  <label class="sr-only" for="debug-theme">Debug theme</label>
+  <select id="debug-theme">
+    {themeNames.map(name => <option value={name} selected={name === config.site.theme}>{name}</option>)}
+  </select>
+</span>
+<style is:inline>
+  #debug-theme-picker { position: relative; display: inline-block; max-width: 100%; margin-left: .75rem; vertical-align: middle; color: var(--muted); }
+  #debug-theme-picker[hidden] { display: none; }
+  #debug-theme-picker::after { content: ''; position: absolute; right: .625rem; top: 50%; width: .375rem; height: .375rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+  #debug-theme { appearance: none; min-width: min(7rem, 100%); max-width: 100%; min-height: 1.5rem; padding: .125rem 1.75rem .125rem .5rem; border: 1px solid var(--border); border-radius: .25rem; background: var(--background); color: var(--muted); font: inherit; cursor: pointer; }
+  #debug-theme:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+</style>
+<script is:inline>
+  (() => {
+    const picker = document.getElementById('debug-theme-picker');
+    const select = document.getElementById('debug-theme');
+    const root = document.documentElement;
+
+    function syncColor() {
+      const background = getComputedStyle(root).getPropertyValue('--background').trim();
+      document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
+        meta.content = background;
+        meta.removeAttribute('media');
+      });
+    }
+
+    select.addEventListener('change', () => {
+      root.dataset.debugTheme = select.value;
+      syncColor();
+    });
+    new MutationObserver(syncColor).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => queueMicrotask(syncColor));
+    picker.hidden = false;
+  })();
+</script>

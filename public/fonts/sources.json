@@ -22,6 +22,20 @@
       "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/ibmplexsans/IBMPlexSans%5Bwdth%2Cwght%5D.ttf",
       "licenseFile": "OFL-IBMPlexSans.txt",
       "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/ibmplexsans/OFL.txt"
+    },
+    {
+      "family": "JetBrains Mono",
+      "file": "jetbrains-mono.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/jetbrainsmono/JetBrainsMono%5Bwght%5D.ttf",
+      "licenseFile": "OFL-JetBrainsMono.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/jetbrainsmono/OFL.txt"
+    },
+    {
+      "family": "Space Grotesk",
+      "file": "space-grotesk.ttf",
+      "source": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/spacegrotesk/SpaceGrotesk%5Bwght%5D.ttf",
+      "licenseFile": "OFL-SpaceGrotesk.txt",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/9710da1eacb3be272583c3224dcb70f9da6eadbb/ofl/spacegrotesk/OFL.txt"
     }
   ]
 }
