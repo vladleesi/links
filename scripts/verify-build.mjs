@@ -34,7 +34,9 @@ assert.ok((await readFile('dist/robots.txt', 'utf8')).includes(new URL('sitemap.
 assert.ok((await readFile('dist/sitemap.xml', 'utf8')).includes('<loc>' + config.site.url + '</loc>'));
 const favicon = await readFile('dist/favicon.svg', 'utf8');
 assert.ok(favicon.includes(initials(config.profile)));
-assert.ok(favicon.includes('prefers-color-scheme:dark'));
+assert.equal(favicon.includes('prefers-color-scheme:dark'), !config.site.mode, 'Static favicon respects configured appearance');
+assert.ok(!favicon.includes('<rect'), 'Favicon has a transparent background');
+assert.ok(favicon.includes('font-family="Arial, sans-serif"') && favicon.includes('font-weight="700"'), 'Favicon matches the portfolio monogram style');
 const png = await readFile('dist/og.png');
 assert.equal(png.readUInt32BE(16), 1200);
 assert.equal(png.readUInt32BE(20), 630);

@@ -16,33 +16,32 @@ const runtime = html.match(/<script>\s*(\(\(\) => \{[\s\S]*?)<\/script>/)?.[1];
 assert.ok(runtime, 'Debug runtime is emitted inline');
 
 const events = {};
-const root = { dataset: { mode: 'dark' } };
+const appearanceEvents = {};
+let themeChanges = 0;
+const root = {
+  dataset: { mode: 'dark' },
+  addEventListener: (type, listener) => { appearanceEvents[type] = listener; },
+  dispatchEvent: event => { assert.equal(event.type, 'link-site-theme-change'); themeChanges++; appearanceEvents[event.type](); },
+};
 const picker = { hidden: true };
 const select = { value: config.site.theme, addEventListener: (event, listener) => { events[event] = listener; } };
 const metas = [{ content: '', removeAttribute() {} }, { content: '', removeAttribute() {} }];
-let background;
-let observer;
-let systemChange;
+const favicon = { dataset: { initials: 'VK' }, href: '' };
+const toggle = { setAttribute() {}, addEventListener: (type, listener) => { appearanceEvents[type] = listener; } };
+const system = { matches: false, addEventListener: (type, listener) => { appearanceEvents[type] = listener; } };
+let palette = (await import(pathToFileURL(resolve(`src/themes/${config.site.theme}.ts`)).href)).default.dark;
+runInNewContext(html.match(/<script type="module">([\s\S]*?)<\/script>/)[1], {
+  document: { documentElement: root, querySelector: selector => selector === '.mode-toggle' ? toggle : favicon, querySelectorAll: () => metas },
+  getComputedStyle: () => ({ getPropertyValue: key => palette[key.slice(2)] }),
+  window: { matchMedia: () => system },
+  localStorage: { setItem() {} },
+});
 runInNewContext(runtime, {
+  Event: class { constructor(type) { this.type = type; } },
   document: {
     documentElement: root,
     getElementById: id => id === 'debug-theme' ? select : picker,
-    querySelectorAll: () => metas,
   },
-  getComputedStyle: () => ({ getPropertyValue: key => { assert.equal(key, '--background'); return background; } }),
-  MutationObserver: class {
-    constructor(callback) { observer = callback; }
-    observe(target, options) {
-      assert.equal(target, root);
-      assert.equal(options.attributes, true);
-      assert.deepEqual(Array.from(options.attributeFilter), ['data-mode']);
-    }
-  },
-  window: { matchMedia: query => {
-    assert.equal(query, '(prefers-color-scheme: dark)');
-    return { addEventListener: (event, listener) => { assert.equal(event, 'change'); systemChange = listener; } };
-  } },
-  queueMicrotask,
 });
 assert.equal(picker.hidden, false, 'JavaScript enables the picker');
 assert.equal(root.dataset.debugTheme, undefined, 'Initialization keeps the configured theme');
@@ -59,20 +58,25 @@ for (const name of names) {
     for (const [key, value] of Object.entries(theme[mode])) assert.ok(html.includes(`--${key}:${value}`), `${name} ${mode}: palette included`);
   }
   root.dataset.mode = 'dark';
-  background = theme.dark.background;
+  palette = theme.dark;
   select.value = name;
   events.change();
   assert.equal(root.dataset.debugTheme, name, 'Selection switches theme without navigation');
   assert.equal(root.dataset.mode, 'dark', 'Theme selection preserves appearance');
-  assert.ok(metas.every(meta => meta.content === background), 'Browser chrome follows the selected theme');
-  root.dataset.mode = 'light';
-  background = theme.light.background;
-  observer();
-  assert.ok(metas.every(meta => meta.content === background), 'Appearance changes update browser chrome');
+  const assertColors = () => {
+    assert.ok(metas.every(meta => meta.content === palette.background), 'Browser chrome follows the selected theme and mode');
+    assert.ok(decodeURIComponent(favicon.href).includes(`fill="${palette.accent}"`), 'Favicon follows the selected theme and mode');
+  };
+  assertColors();
+  palette = theme.light;
+  appearanceEvents.click();
+  assert.equal(root.dataset.mode, 'light');
+  assertColors();
   delete root.dataset.mode;
-  background = theme.dark.background;
-  systemChange();
-  await new Promise(resolve => queueMicrotask(resolve));
-  assert.ok(metas.every(meta => meta.content === background), 'System appearance updates browser chrome');
+  palette = theme.dark;
+  system.matches = true;
+  appearanceEvents.change();
+  assertColors();
 }
-console.log('Passed debug theme discovery, initial selection, all palettes/fonts, runtime switching, appearance preservation, and theme-color synchronization.');
+assert.equal(themeChanges, names.length, 'Each theme selection notifies the shared appearance runtime');
+console.log('Passed debug theme discovery, all palettes/fonts, runtime switching, appearance preservation, and favicon/theme-color synchronization.');

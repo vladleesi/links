@@ -47,7 +47,7 @@ All themes support light and dark appearances and use local fonts. Set `site.mod
 
 Link hover adds a small bounce and icon wiggle on devices with a mouse. Animations respect the system’s reduced-motion preference.
 
-Add one file under `src/themes/` and select its filename in YAML. Copy an existing theme to start; themes contain colors and fonts only. Local custom fonts go under `public/fonts/` and are declared in `fonts.faces`. Optional `fonts.preview` names a local TTF/OTF font for the generated sharing image. The image uses the theme’s light palette; the favicon supports both appearances.
+Add one file under `src/themes/` and select its filename in YAML. Copy an existing theme to start; themes contain colors and fonts only. Local custom fonts go under `public/fonts/` and are declared in `fonts.faces`. Optional `fonts.preview` names a local TTF/OTF font for the generated sharing image. The image uses the theme’s light palette. The favicon uses bold initials on a transparent background in the current theme’s accent color, following appearance changes and the debug theme picker. Without JavaScript, it follows the configured or system appearance.
 
 ## Build
 

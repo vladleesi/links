@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.1 - 2026-10-05
+
+- Match the portfolio favicon’s bold Arial initials, tight spacing, and transparent background while keeping profile initials generated from configuration.
+- Use each theme’s accent color for the favicon and synchronize it with saved, configured, and system appearance choices, plus the debug theme picker.
+- Keep the static favicon usable without JavaScript and respect an explicitly configured appearance.
+
 ## 1.4.0 - 2026-10-05
 
 - Add `control`: near-black and warm-paper palettes with restrained red accents and local Archivo typography, preserving the shared layout, cards, and animations.

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { config, displayName, title, description, assetPath } from '../lib/config';
+import { config, displayName, title, description, assetPath, initials } from '../lib/config';
 import { theme, themeCss } from '../lib/theme';
 import { resolveLinks } from '../lib/links';
 import LinkCard from '../components/LinkCard.astro';
@@ -25,7 +25,7 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={config.site.url} />
-    <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} />
+    <link rel="icon" type="image/svg+xml" href={assetPath('favicon.svg')} data-initials={initials(config.profile)} />
     <meta name="theme-color" content={theme.light.background} media={config.site.mode ? (config.site.mode === 'light' ? undefined : 'not all') : '(prefers-color-scheme: light)'} />
     <meta name="theme-color" content={theme.dark.background} media={config.site.mode ? (config.site.mode === 'dark' ? undefined : 'not all') : '(prefers-color-scheme: dark)'} />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -71,20 +71,27 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
       <footer>© {year} {config.profile.username} <a class="credits-link" href={assetPath('credits.txt')}>Credits</a> {debug && <DebugThemePicker />}</footer>
     </main>
     <script>
+      import { faviconSvg } from '../lib/favicon';
+
       const toggle = document.querySelector<HTMLButtonElement>('.mode-toggle');
+      const favicon = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
       const root = document.documentElement;
       const system = window.matchMedia('(prefers-color-scheme: dark)');
-      const colors = Array.from(document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]'), meta => meta.content);
       const isDark = () => root.dataset.mode ? root.dataset.mode === 'dark' : system.matches;
 
       function syncMode() {
         const dark = isDark();
+        const palette = getComputedStyle(root);
         toggle?.setAttribute('aria-checked', String(dark));
         if (toggle) toggle.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
         document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach(meta => {
-          meta.content = colors[dark ? 1 : 0];
+          meta.content = palette.getPropertyValue('--background').trim();
           meta.removeAttribute('media');
         });
+        if (favicon) {
+          const svg = faviconSvg(favicon.dataset.initials || '', palette.getPropertyValue('--accent').trim());
+          favicon.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+        }
       }
 
       if (toggle) {
@@ -95,6 +102,7 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
           syncMode();
         });
         system.addEventListener('change', syncMode);
+        root.addEventListener('link-site-theme-change', syncMode);
         toggle.hidden = false;
       }
     </script>

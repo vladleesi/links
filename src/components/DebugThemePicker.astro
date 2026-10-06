@@ -24,20 +24,10 @@ const css = themeNames.map(name => createThemeCss(name, `:root[data-debug-theme=
     const select = document.getElementById('debug-theme');
     const root = document.documentElement;
 
-    function syncColor() {
-      const background = getComputedStyle(root).getPropertyValue('--background').trim();
-      document.querySelectorAll('meta[name="theme-color"]').forEach(meta => {
-        meta.content = background;
-        meta.removeAttribute('media');
-      });
-    }
-
     select.addEventListener('change', () => {
       root.dataset.debugTheme = select.value;
-      syncColor();
+      root.dispatchEvent(new Event('link-site-theme-change'));
     });
-    new MutationObserver(syncColor).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => queueMicrotask(syncColor));
     picker.hidden = false;
   })();
 </script>

@@ -121,6 +121,9 @@ try {
       const rgb = 'rgb(' + [1, 3, 5].map(index => parseInt(hex.slice(index, index + 2), 16)).join(', ') + ')';
       assert.equal(await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor), rgb);
       assert.equal(await page.locator('meta[name="theme-color"]').first().getAttribute('content'), hex);
+      const svg = decodeURIComponent((await page.locator('link[rel="icon"]').getAttribute('href')).replace('data:image/svg+xml,', ''));
+      assert.ok(svg.includes(`fill="${fixture.theme[mode].accent}"`), 'Favicon accent: ' + fixture.id + ' ' + mode);
+      assert.ok(!svg.includes('<rect'), 'Transparent favicon: ' + fixture.id);
     };
     await assertMode('light');
     await toggle.focus();

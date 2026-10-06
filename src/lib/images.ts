@@ -2,12 +2,13 @@ import { Resvg } from '@resvg/resvg-js';
 import { fileURLToPath } from 'node:url';
 import { config, initials } from './config';
 import { theme, fontFile } from './theme';
+import { escapeXml, faviconSvg } from './favicon';
 
-export const escapeXml = (text: string) => text.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[character]!));
+export { escapeXml } from './favicon';
 export const monogram = initials(config.profile);
 
 export function favicon(): string {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><style>rect{fill:${theme.light.background}}text{fill:${theme.light.accent}}@media(prefers-color-scheme:dark){rect{fill:${theme.dark.background}}text{fill:${theme.dark.accent}}}</style><rect width="64" height="64" rx="12"/><text x="32" y="33" text-anchor="middle" dominant-baseline="central" font-family="system-ui,sans-serif" font-size="${monogram.length > 2 ? 24 : 28}" font-weight="600">${escapeXml(monogram)}</text></svg>`;
+  return faviconSvg(monogram, theme.light.accent, theme.dark.accent, config.site.mode);
 }
 
 export function sharingImage(): Uint8Array {
