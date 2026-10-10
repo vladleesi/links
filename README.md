@@ -80,6 +80,15 @@ npm run preview
 
 The static site is generated in `dist/`, including the favicon, 1200×630 sharing image, SEO metadata, and sitemap. Sharing images follow `site.mode`, defaulting to light when unset. Fonts and icons are bundled locally.
 
+### Debug build
+
+```sh
+npm run build:debug
+npm run preview -- --outDir dist-debug
+```
+
+Includes a footer theme picker for comparing themes without changing `config.yaml`. Production builds omit the picker.
+
 ## GitHub Pages
 
 1. Fork the repository and edit `config.yaml`.
