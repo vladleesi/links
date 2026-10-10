@@ -4,6 +4,7 @@ dist-debug/
 .astro/
 .sites-runtime/
 .npm-cache/
+.idea/
 
 # Local AI agent configuration and state
 .openai/

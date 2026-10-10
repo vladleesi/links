@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.2 - 2026-10-10
+
+- Balance the generated Open Graph image with a centered monogram and a larger, aligned profile text column, using the selected theme's local fonts and colors.
+- Include the configured profile title below the name and username.
+- Measure text with the bundled fonts, wrap long profile fields at safe character boundaries, and shorten exceptionally long content with an ellipsis to preserve readable spacing.
+- Preserve static build-time PNG generation and existing sharing metadata.
+- Ignore local IntelliJ IDEA project settings.
+
 ## 1.4.1 - 2026-10-05
 
 - Match the portfolio favicon’s bold Arial initials, tight spacing, and transparent background while keeping profile initials generated from configuration.
