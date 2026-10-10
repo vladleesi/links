@@ -15,7 +15,6 @@ export function favicon(): string {
 export function sharingImage(): Uint8Array {
   // Crawlers have no appearance preference; sharing uses the light palette.
   const colors = theme.light;
-  const name = config.profile.fullName || `@${config.profile.username}`;
   const handle = `@${config.profile.username}`;
   const family = theme.fonts.preview ? theme.fonts.heading.split(',')[0].trim().replace(/["']/g, '') : 'Open Sans';
   if (theme.fonts.preview && !/\.(ttf|otf)$/.test(theme.fonts.preview)) throw new Error('Theme fonts.preview must be a local TTF or OTF font.');
@@ -43,7 +42,7 @@ export function sharingImage(): Uint8Array {
   };
   const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
   const characters = (value: string) => [...segmenter.segment(value)].map(part => part.segment);
-  const copyX = 352;
+  let copyX = 0;
   const copyWidth = 776;
   const fit = (value: string, fontFamily: string, weight: number, maximum: number, minimum: number, maxLines: number, color: string, gap: number) => {
     let lines: string[] = [];
@@ -78,12 +77,16 @@ export function sharingImage(): Uint8Array {
     const top = Math.min(...bounds.map(box => box.y));
     const bottom = Math.max(...bounds.map(box => box.y + box.height));
     const leading = Math.max(size * 1.2, bottom - top + 4);
-    return { height: (lines.length - 1) * leading + bottom - top, gap,
+    return { size, width: Math.max(...bounds.map(box => box.width)), height: (lines.length - 1) * leading + bottom - top, gap,
       render: (y: number) => lines.map((line, index) => text(line, fontFamily, size, weight, copyX - bounds[index].x, y - top + index * leading, color)).join('') };
   };
-  const blocks = [fit(name, family, 650, 72, 40, 2, colors.text, 0)];
-  if (config.profile.fullName) blocks.push(fit(handle, body, 400, 30, 24, 2, colors.muted, 20));
-  if (config.profile.title) blocks.push(fit(config.profile.title, body, 400, 34, 26, 3, colors.text, 26));
+  // The required handle leads; optional details stay smaller even when it shrinks.
+  const blocks = [fit(handle, family, 650, 72, 40, 2, colors.text, 0)];
+  if (config.profile.fullName) blocks.push(fit(config.profile.fullName, body, 400, 36, 28, 2, colors.text, 16));
+  if (config.profile.title) blocks.push(fit(config.profile.title, body, 400, 24, 22, 3, colors.muted, config.profile.fullName ? 28 : 20));
+  // Center the visible group, with no space reserved for omitted details.
+  const markX = (1200 - 208 - 64 - Math.max(...blocks.map(block => block.width))) / 2;
+  copyX = markX + 208 + 64;
   const height = blocks.reduce((sum, block) => sum + block.height + block.gap, 0);
   let y = (630 - height) / 2;
   const copy = blocks.map(block => {
@@ -92,8 +95,8 @@ export function sharingImage(): Uint8Array {
     y += block.height;
     return markup;
   }).join('');
-  const markSize = Math.min(112, 112 * 160 / Math.max(160, measure(monogram, family, 112, 650).width));
+  const markSize = Math.min(64, blocks[0].size * 0.85, 64 * 160 / Math.max(160, measure(monogram, family, 64, 650).width));
   const mark = measure(monogram, family, markSize, 650);
-  const svg = `${svgRoot}<rect width="1200" height="630" fill="${colors.background}"/><rect x="72" y="211" width="208" height="208" rx="20" fill="${colors.surface}"/>${text(monogram, family, markSize, 650, 176 - mark.x - mark.width / 2, 315 - mark.y - mark.height / 2, colors.accent)}${copy}</svg>`;
+  const svg = `${svgRoot}<rect width="1200" height="630" fill="${colors.background}"/><rect x="${markX}" y="211" width="208" height="208" rx="20" fill="${colors.surface}"/>${text(monogram, family, markSize, 650, markX + 104 - mark.x - mark.width / 2, 315 - mark.y - mark.height / 2, colors.accent)}${copy}</svg>`;
   return new Resvg(svg, options).render().asPng();
 }

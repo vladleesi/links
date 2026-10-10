@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.3 - 2026-10-10
+
+- Make the required `@username` the first and largest text in the Open Graph image, with the optional full name and profile title as supporting details.
+- Reduce the monogram's prominence and preserve the text hierarchy when long profile fields shrink or wrap.
+- Distinguish the full name from the smaller profile title through typography and spacing, and recenter the visible content when either optional field is omitted.
+
 ## 1.4.2 - 2026-10-10
 
 - Balance the generated Open Graph image with a centered monogram and a larger, aligned profile text column, using the selected theme's local fonts and colors.
