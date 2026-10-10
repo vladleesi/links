@@ -10,6 +10,7 @@ import assert from 'node:assert/strict';
 import { initials } from '../src/lib/config.ts';
 import defaultTheme from '../src/themes/default.ts';
 import materialTheme from '../src/themes/material.ts';
+import { sharingImageUrl } from '../src/lib/og.ts';
 import monokaiTheme from '../src/themes/monokai.ts';
 
 const require = createRequire(import.meta.url);
@@ -87,7 +88,7 @@ try {
     assert.equal(png.readUInt32BE(20), 630);
     const html = await readFile(resolve(fixture.root, 'index.html'), 'utf8');
     assert.ok(html.includes(fixture.config.site.url));
-    assert.ok(html.includes(new URL('og.png', fixture.config.site.url).href));
+    assert.ok(html.includes(sharingImageUrl(fixture.config.site.url, png)));
     assert.ok((await readFile(resolve(fixture.root, 'robots.txt'), 'utf8')).includes(new URL('sitemap.xml', fixture.config.site.url).href));
     assert.ok((await readFile(resolve(fixture.root, 'sitemap.xml'), 'utf8')).includes(fixture.config.site.url));
     for (const colorScheme of ['light', 'dark']) {

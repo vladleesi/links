@@ -22,4 +22,6 @@ The build generates `credits.txt` with asset attribution and full license texts.
 
 [The font manifest](public/fonts/sources.json) records the pinned Google Fonts revision and exact download URLs for Source Sans 3, Lora, IBM Plex Sans, JetBrains Mono, Space Grotesk, and Archivo. These variable TTF files are vendored without modification; Ember reuses Manrope and Carbon reuses IBM Plex Sans.
 
+Sharing-image fonts are static 400/700 weight instances of the vendored fonts, generated with the [font generator](scripts/instance-og-fonts.py) and FontTools 4.66.1. They retain upstream OFL licenses; internal families are renamed to respect reserved font names. [The derived font manifest](src/assets/fonts/og/sources.json) records source/output hashes, weights, families, and licenses. These fonts are build inputs; `credits.txt` includes their attribution and licenses.
+
 npm dependencies retain their individual licenses, included in their installed packages and recorded in `package-lock.json`.

@@ -47,7 +47,13 @@ All themes support light and dark appearances and use local fonts. Set `site.mod
 
 Link hover adds a small bounce and icon wiggle on devices with a mouse. Animations respect the system’s reduced-motion preference.
 
-Add one file under `src/themes/` and select its filename in YAML. Copy an existing theme to start; themes contain colors and fonts only. Local custom fonts go under `public/fonts/` and are declared in `fonts.faces`. Optional `fonts.preview` names a local TTF/OTF font for the generated sharing image. The image uses the theme’s light palette. The favicon uses bold initials on a transparent background in the current theme’s accent color, following appearance changes and the debug theme picker. Without JavaScript, it follows the configured or system appearance.
+Add one file under `src/themes/` and select its filename in YAML. Copy an existing theme to start; themes contain colors and fonts only. Local custom fonts go under `public/fonts/` and are declared in `fonts.faces`. Optional `fonts.preview` names a local TTF/OTF font for the generated sharing image. The image follows `site.mode`, using light when empty or omitted. The favicon uses bold initials on a transparent background in the current theme’s accent color, following appearance changes and the debug theme picker. Without JavaScript, it follows the configured or system appearance.
+
+Sharing images show “Links” in the theme's accent color, a large username, and optional full name and title. Measured text adapts within 72-pixel safe margins; missing fields leave no gaps. Extreme content uses an ellipsis at readable size limits.
+
+Bundled static fonts provide regular and bold weights. Use static fonts for custom previews. Missing glyphs fall back to local Open Sans and Source Sans 3; unsupported characters show � and a build warning. Add a local font covering your script if needed.
+
+OG and Twitter metadata use `og/<hash>.png` URLs that change with the image content; `og.png` remains available. Upload the complete `dist/` directory after rebuilding. Social platforms may need their cached page metadata refreshed.
 
 ## Build
 
@@ -81,6 +87,7 @@ npm run test:version
 npm run check
 npm run test:config
 npm run test:themes
+npm run test:og
 npm run build
 npm run verify
 npm run test:browser

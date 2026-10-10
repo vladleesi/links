@@ -1,0 +1,142 @@
+{
+  "generator": "scripts/instance-og-fonts.py",
+  "tool": "FontTools 4.66.1",
+  "notes": "Static weight instances of existing vendored fonts, with renamed families to respect OFL reserved names. No font downloads or build dependencies.",
+  "fonts": [
+    {
+      "file": "opensans-400.ttf",
+      "family": "OG Sans",
+      "weight": 400,
+      "source": "public/fonts/opensans.ttf",
+      "sourceSha256": "36643644f318a812aab2d2ed3bb98f8cf0872527f835fe9398d95fe6b9adb878",
+      "sha256": "e848e66a3a81b281f394a8cfeb0eb8d754259f1cdfb15fd4045f87fff695f21b",
+      "license": "public/fonts/OFL-OpenSans.txt"
+    },
+    {
+      "file": "opensans-700.ttf",
+      "family": "OG Sans",
+      "weight": 700,
+      "source": "public/fonts/opensans.ttf",
+      "sourceSha256": "36643644f318a812aab2d2ed3bb98f8cf0872527f835fe9398d95fe6b9adb878",
+      "sha256": "e998166fe4b5ad1010315855a94cbddb041d2896af33f811183454c14bc453b5",
+      "license": "public/fonts/OFL-OpenSans.txt"
+    },
+    {
+      "file": "manrope-400.ttf",
+      "family": "OG Manrope",
+      "weight": 400,
+      "source": "public/fonts/manrope.ttf",
+      "sourceSha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "sha256": "5aa535af2f2ffaab4d422a3e5f742cf8cf1492933bc92efa267f5aa7f53d3af2",
+      "license": "public/fonts/OFL.txt"
+    },
+    {
+      "file": "manrope-700.ttf",
+      "family": "OG Manrope",
+      "weight": 700,
+      "source": "public/fonts/manrope.ttf",
+      "sourceSha256": "3ae11c49db0455a3cc33e37d380f20fdb8c7f8b41dc07625c177e3d87a9d6ae6",
+      "sha256": "ca818775fe021913f18b754b400e98610cf6fa0e15ed26bd048d1c6dbe268b9f",
+      "license": "public/fonts/OFL.txt"
+    },
+    {
+      "file": "ibm-plex-sans-400.ttf",
+      "family": "OG IBM Sans",
+      "weight": 400,
+      "source": "public/fonts/ibm-plex-sans.ttf",
+      "sourceSha256": "3b031aa4216174205bd8471f88a49b91f093169e9e87bd5262242bc5967fe2e3",
+      "sha256": "0291639735863f9ed4bda3372d02bd254aea38771a0cbf7866ea5df761147114",
+      "license": "public/fonts/OFL-IBMPlexSans.txt"
+    },
+    {
+      "file": "ibm-plex-sans-700.ttf",
+      "family": "OG IBM Sans",
+      "weight": 700,
+      "source": "public/fonts/ibm-plex-sans.ttf",
+      "sourceSha256": "3b031aa4216174205bd8471f88a49b91f093169e9e87bd5262242bc5967fe2e3",
+      "sha256": "1a6489d84380ff8e12da41085de2283c0cee1e565ebc85b9ed445a3fc110c834",
+      "license": "public/fonts/OFL-IBMPlexSans.txt"
+    },
+    {
+      "file": "jetbrains-mono-400.ttf",
+      "family": "OG JetBrains Mono",
+      "weight": 400,
+      "source": "public/fonts/jetbrains-mono.ttf",
+      "sourceSha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
+      "sha256": "ca46b0ea62a8121a1696307aa7604356aa8aef5a1502a395e0f583a7141da4f9",
+      "license": "public/fonts/OFL-JetBrainsMono.txt"
+    },
+    {
+      "file": "jetbrains-mono-700.ttf",
+      "family": "OG JetBrains Mono",
+      "weight": 700,
+      "source": "public/fonts/jetbrains-mono.ttf",
+      "sourceSha256": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
+      "sha256": "5e7bac25f309b9c1e308da596e0b9710fbaea14b7f1a948c79785db98a4c7ad7",
+      "license": "public/fonts/OFL-JetBrainsMono.txt"
+    },
+    {
+      "file": "lora-400.ttf",
+      "family": "OG Serif",
+      "weight": 400,
+      "source": "public/fonts/lora.ttf",
+      "sourceSha256": "822a6621ccbe8d97d20ac88c1c41f5615c9c2c202eaa75f272cd452aac6475a7",
+      "sha256": "161f94f96df064a2ff4dfe4f75a3788076c94e5c23cce91c341b034fd1d4fd07",
+      "license": "public/fonts/OFL-Lora.txt"
+    },
+    {
+      "file": "lora-700.ttf",
+      "family": "OG Serif",
+      "weight": 700,
+      "source": "public/fonts/lora.ttf",
+      "sourceSha256": "822a6621ccbe8d97d20ac88c1c41f5615c9c2c202eaa75f272cd452aac6475a7",
+      "sha256": "b944255f3405085bd9ce2855c55781353c9431d0fdb8b378bbc8d49921ba99c6",
+      "license": "public/fonts/OFL-Lora.txt"
+    },
+    {
+      "file": "space-grotesk-400.ttf",
+      "family": "OG Space Grotesk",
+      "weight": 400,
+      "source": "public/fonts/space-grotesk.ttf",
+      "sourceSha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "sha256": "29553a8a2fc089062d1365e3d98278de8c5d204f708fdc8a3c79cce6295b9f60",
+      "license": "public/fonts/OFL-SpaceGrotesk.txt"
+    },
+    {
+      "file": "space-grotesk-700.ttf",
+      "family": "OG Space Grotesk",
+      "weight": 700,
+      "source": "public/fonts/space-grotesk.ttf",
+      "sourceSha256": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "sha256": "1a461bec19bd3cbb21ed643c04a252ab3cf93f5de3cc455796b39ca60e2d8dac",
+      "license": "public/fonts/OFL-SpaceGrotesk.txt"
+    },
+    {
+      "file": "archivo-400.ttf",
+      "family": "OG Archivo",
+      "weight": 400,
+      "source": "public/fonts/archivo.ttf",
+      "sourceSha256": "0e094a7d3c7c4c25cf1310c4b30014f1dae9332220b1c2c88f4fa996f0b05053",
+      "sha256": "de0c16d8cd5fa1f06ef564279e3356b10f72b0d09b3ae1faf1fea5325b686499",
+      "license": "public/fonts/OFL-Archivo.txt"
+    },
+    {
+      "file": "archivo-700.ttf",
+      "family": "OG Archivo",
+      "weight": 700,
+      "source": "public/fonts/archivo.ttf",
+      "sourceSha256": "0e094a7d3c7c4c25cf1310c4b30014f1dae9332220b1c2c88f4fa996f0b05053",
+      "sha256": "80a51b18b6f51f0aafb657e879e062c0f14bbd1bfa767e3cfc7771dcdfe010a6",
+      "license": "public/fonts/OFL-Archivo.txt"
+    },
+    {
+      "file": "source-sans-3-400.ttf",
+      "family": "OG Humanist",
+      "weight": 400,
+      "source": "public/fonts/source-sans-3.ttf",
+      "sourceSha256": "042fe2cc0b933e328410d7acbd0aa6a1873dca5aef81875f4bc214b08825c7b9",
+      "sha256": "d8c310446c107f77957f74298b23d24156e59d26b1215ea34db1096d053a3a9c",
+      "license": "public/fonts/OFL-SourceSans3.txt"
+    }
+  ]
+}

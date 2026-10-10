@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.4.4 - 2026-10-10
+
+- Replace the OG monogram with a larger text-first layout using theme fonts and colors, a minimal “Links” cue, and optional profile details.
+- Respect `site.mode` in OG images; default to light when empty or omitted.
+- Fit measured text within safe margins, wrap naturally, omit empty fields, and use ellipsis only at readable size limits.
+- Keep generation local and deterministic with licensed static font weights; warn when fonts cannot render a character.
+- Add descriptive OG/Twitter alt text and content-fingerprinted images; retain `og.png`. Upload the complete build directory to include `og/`.
+- Test both modes of all ten themes for layout, typography, contrast, Unicode, and sharing URLs.
+
 ## 1.4.3 - 2026-10-10
 
 - Make the required `@username` the first and largest text in the Open Graph image, with the optional full name and profile title as supporting details.

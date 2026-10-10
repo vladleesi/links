@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { config, displayName, title, description, assetPath, initials } from '../lib/config';
 import { theme, themeCss } from '../lib/theme';
+import { sharingAlt, sharingTwitterAlt, sharingUrl } from '../lib/images';
 import { resolveLinks } from '../lib/links';
 import LinkCard from '../components/LinkCard.astro';
 import DebugThemePicker from '../components/DebugThemePicker.astro';
@@ -9,7 +10,7 @@ import DebugThemePicker from '../components/DebugThemePicker.astro';
 const debug = import.meta.env.DEV || import.meta.env.MODE === 'debug';
 
 const links = resolveLinks(config.links);
-const image = new URL('og.png', config.site.url).href;
+const image = sharingUrl();
 const schema = {
   '@context': 'https://schema.org', '@type': 'Person',
   name: displayName, alternateName: config.profile.username, url: config.site.url,
@@ -38,12 +39,12 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={title} />
+    <meta property="og:image:alt" content={sharingAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-    <meta name="twitter:image:alt" content={title} />
+    <meta name="twitter:image:alt" content={sharingTwitterAlt} />
     <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
     <script is:inline>
       try {

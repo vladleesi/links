@@ -33,6 +33,7 @@ jobs:
       - run: npm run check
       - run: npm run test:config
       - run: npm run test:themes
+      - run: npm run test:og
       - run: npm run build
       - run: npm run verify
       - uses: actions/upload-pages-artifact@v4

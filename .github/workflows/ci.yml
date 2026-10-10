@@ -32,6 +32,7 @@ jobs:
       - run: npm run check
       - run: npm run test:config
       - run: npm run test:themes
+      - run: npm run test:og
       - run: npm run build:debug
       - run: npm run verify:debug
       - run: npm run build
