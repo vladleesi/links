@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.5 - 2026-10-10
+
+- Add a README showcase with four mobile configurations in a single row and six Open Graph previews generated from the existing application and themes.
+- Demonstrate varied profile content, optional fields, detected icons, hostnames, and adaptive sharing-image typography using small local PNG assets.
+
 ## 1.4.4 - 2026-10-10
 
 - Replace the OG monogram with a larger text-first layout using theme fonts and colors, a minimal “Links” cue, and optional profile details.

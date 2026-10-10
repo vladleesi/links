@@ -2,6 +2,32 @@
 
 A minimal, YAML-driven static links page. Fork it, edit one file, and build.
 
+## Themes & Configurations
+
+<table>
+  <tr>
+    <td width="25%" align="center"><img src="docs/images/site-material-light.png" alt="Maya Chen’s design links in Material light, with detected icons and visible hostnames" width="390"><br><sub>Material<br>Light</sub></td>
+    <td width="25%" align="center"><img src="docs/images/site-monokai-dark.png" alt="Theo’s seven developer links in Monokai dark, with the optional full name omitted" width="390"><br><sub>Monokai<br>Dark</sub></td>
+    <td width="25%" align="center"><img src="docs/images/site-paper-light.png" alt="Eleanor Moss’s four writing links in Paper light, with longer text and hostnames" width="390"><br><sub>Paper<br>Light</sub></td>
+    <td width="25%" align="center"><img src="docs/images/site-control-dark.png" alt="Jules Rivera’s six photography and creative links in Control dark" width="390"><br><sub>Control<br>Dark</sub></td>
+  </tr>
+</table>
+
+## Open Graph Previews
+
+<table>
+  <tr>
+    <td width="33%" align="center"><img src="docs/images/og-material-light.png" alt="Material light OG preview for @leo, Leo Park, Developer" width="400"><br><sub>Material<br>Light</sub></td>
+    <td width="33%" align="center"><img src="docs/images/og-monokai-dark.png" alt="Monokai dark OG preview for @alexandra.builds, Alexandra Bennett-Williams, Independent software engineer &amp; open-source maintainer" width="400"><br><sub>Monokai<br>Dark</sub></td>
+    <td width="33%" align="center"><img src="docs/images/og-paper-light.png" alt="Paper light OG preview for @eleanor.writes, Eleanor Whitmore, Author, editor &amp; narrative designer" width="400"><br><sub>Paper<br>Light</sub></td>
+  </tr>
+  <tr>
+    <td width="33%" align="center"><img src="docs/images/og-control-dark.png" alt="Control dark OG preview for @nia, Nia Brooks, Art director" width="400"><br><sub>Control<br>Dark</sub></td>
+    <td width="33%" align="center"><img src="docs/images/og-arctic-light.png" alt="Arctic light OG preview for @samir.research, Samir Haddad, Climate scientist &amp; data storyteller" width="400"><br><sub>Arctic<br>Light</sub></td>
+    <td width="33%" align="center"><img src="docs/images/og-console-dark.png" alt="Console dark OG preview for @ravi.ops, Ravi Narayanan, Site reliability engineer / infrastructure, observability &amp; developer platforms" width="400"><br><sub>Console<br>Dark</sub></td>
+  </tr>
+</table>
+
 ## Quick start
 
 Use Node.js 24 (or 22.18+) and npm 9.6.5+.
