@@ -1,6 +1,5 @@
 node_modules/
 dist/
-dist-debug/
 .astro/
 .sites-runtime/
 .npm-cache/

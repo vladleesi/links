@@ -37,6 +37,11 @@ npm ci
 npm run dev
 ```
 
+> [!TIP]
+> **Theme picker:** `npm run dev` includes a footer dropdown to preview all 10 themes instantly without editing `config.yaml`. Use the appearance switch to compare light and dark modes.
+
+Restart the dev server after changing `config.yaml`.
+
 ## Configuration
 
 Edit `config.yaml` with your profile and links.
@@ -69,7 +74,16 @@ Set `site.theme` to `default`, `material`, `monokai`, `paper`, `arctic`, `ember`
 
 All themes support light and dark modes. `site.mode` sets the initial appearance; omit it to follow the system. Visitors can switch modes, and their saved choice takes precedence.
 
-Preview themes with the dropdown in `npm run dev`. To create a theme, copy a file in [`src/themes/`](src/themes/) and customize its colors and fonts.
+### Create your own theme
+
+1. Copy [`src/themes/arctic.ts`](src/themes/arctic.ts) to `src/themes/my-theme.ts`.
+2. Customize the `light` and `dark` palettes with six-digit hex colors, and choose `fonts.body` and `fonts.heading`.
+3. Set `site.theme: my-theme` in `config.yaml`, then restart `npm run dev`.
+
+Themes define colors and fonts; the shared layout and behavior stay the same.
+
+> [!TIP]
+> **Custom fonts:** Add files to `public/fonts/` and declare them in `fonts.faces`. Set `fonts.preview` to a local static TTF/OTF path (such as `/fonts/my-font.ttf`) for the OG image.
 
 ## Build
 
@@ -79,15 +93,6 @@ npm run preview
 ```
 
 The static site is generated in `dist/`, including the favicon, 1200×630 sharing image, SEO metadata, and sitemap. Sharing images follow `site.mode`, defaulting to light when unset. Fonts and icons are bundled locally.
-
-### Debug build
-
-```sh
-npm run build:debug
-npm run preview -- --outDir dist-debug
-```
-
-Includes a footer theme picker for comparing themes without changing `config.yaml`. Production builds omit the picker.
 
 ## GitHub Pages
 

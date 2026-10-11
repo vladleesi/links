@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.6 - 2026-10-11
+
+- Remove the separate debug build command, output verifier, and CI steps; use `npm run dev` to preview themes instead.
+- Keep the footer theme picker exclusive to development and omit it from static production builds.
+- Highlight the development theme picker and clarify custom theme creation, local fonts, and restarting after configuration changes in the README.
+
 ## 1.4.5 - 2026-10-10
 
 - Add a README showcase with four mobile configurations in a single row and six Open Graph previews generated from the existing application and themes.

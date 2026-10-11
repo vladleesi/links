@@ -7,8 +7,6 @@ import { resolveLinks } from '../lib/links';
 import LinkCard from '../components/LinkCard.astro';
 import DebugThemePicker from '../components/DebugThemePicker.astro';
 
-const debug = import.meta.env.DEV || import.meta.env.MODE === 'debug';
-
 const links = resolveLinks(config.links);
 const image = sharingUrl();
 const schema = {
@@ -69,7 +67,7 @@ const year = process.env.SOURCE_DATE_EPOCH ? new Date(Number(process.env.SOURCE_
         </button>
       </header>
       <nav id="links" aria-label="Personal links" tabindex="-1"><ul class="links">{links.map(link => <li><LinkCard link={link} /></li>)}</ul></nav>
-      <footer>© {year} {config.profile.username} <a class="credits-link" href={assetPath('credits.txt')}>Credits</a> {debug && <DebugThemePicker />}</footer>
+      <footer>© {year} {config.profile.username} <a class="credits-link" href={assetPath('credits.txt')}>Credits</a> {import.meta.env.DEV && <DebugThemePicker />}</footer>
     </main>
     <script>
       import { faviconSvg } from '../lib/favicon';
