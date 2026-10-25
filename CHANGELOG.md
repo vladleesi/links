@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.8 - 2026-10-24
+
+- Update Astro to 7.4.2 and Zod to 4.6.7, fixing the reported Zod memory exhaustion vulnerability.
+- Update the Astro checker, accessibility and browser test tools, and Node.js types; upgrade TypeScript to 6.0.3.
+- Keep Renovate TypeScript updates below version 7 until the Astro checker supports it.
+- Upgrade the GitHub Pages actions and explicitly include hidden build files such as `.nojekyll` in the uploaded artifact.
+- Align the minimum Node.js engine with Astro's security requirement of 22.23.4; the recommended Node.js 24 setup remains supported. Older build environments must upgrade Node.js before installing.
+
 ## 1.4.7 - 2026-10-24
 
 - Configure Renovate with the shared `vladleesi/renovate-config` preset for dependency reporting and updates held for dashboard approval.

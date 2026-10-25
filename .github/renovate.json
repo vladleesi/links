@@ -1,4 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>vladleesi/renovate-config"]
+  "extends": ["github>vladleesi/renovate-config"],
+  "packageRules": [
+    {
+      "description": "Keep TypeScript within @astrojs/check's supported peer range; revisit when the checker supports TypeScript 7.",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
+    }
+  ]
 }
