@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.7 - 2026-10-24
+
+- Configure Renovate with the shared `vladleesi/renovate-config` preset for dependency reporting and updates held for dashboard approval.
+
 ## 1.4.6 - 2026-10-11
 
 - Remove the separate debug build command, output verifier, and CI steps; use `npm run dev` to preview themes instead.
